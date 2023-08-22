@@ -1,7 +1,7 @@
 /* Este es un simuledor de creditos.
 El usuario debe ingresar los datos solicitados para poder acceder*/
 
-let usuario = prompt("Ingrese su usuario");
+/*let usuario = prompt("Ingrese su usuario");
 let password = "javascript";
 
 //Esta función se encarga de verificar la contraseña
@@ -60,6 +60,123 @@ let calculo = () => {
     }
     } 
     calculo();
+*/
+
+
+
+
+
+
+
+/*
+
+// Datos de acceso
+const usuarioValido = "CODERHOUSE";
+const contraseñaValida = "javascript";
+
+// Función para verificar si el usuario y contraseña son válidos
+function verificarCredenciales(usuario, contraseña) {
+  return usuario === usuarioValido && contraseña === contraseñaValida;
+}
+
+// Función para calcular la edad a partir de la fecha de nacimiento
+function calcularEdad(fechaNacimiento) {
+  const hoy = new Date();
+  const fechaNacimientoArray = fechaNacimiento.split("/");
+  const fechaNacimientoDate = new Date(
+    fechaNacimientoArray[2],
+    fechaNacimientoArray[1] - 1,
+    fechaNacimientoArray[0]
+  );
+  let edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+  const mesActual = hoy.getMonth();
+  const diaActual = hoy.getDate();
+  const mesNacimiento = fechaNacimientoDate.getMonth();
+  const diaNacimiento = fechaNacimientoDate.getDate();
+
+  if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+    edad--;
+  }
+
+  return edad;
+}
+
+// Función para calcular el monto total a pagar en cuotas
+function calcularMontoTotal(monto, cuotas) {
+  const interesesPorCuota = [0, 0.22, 0.22, 0.22, 0.33, 0.33, 0.33, 0.44, 0.44, 0.44, 0.44];
+  const interes = interesesPorCuota[cuotas];
+  return monto * (1 + interes);
+}
+
+// Función para calcular el valor de cada cuota
+function calcularValorCuota(monto, cuotas) {
+  return calcularMontoTotal(monto, cuotas) / cuotas;
+}
+
+// Función para generar fechas de pago en base a la cantidad de cuotas
+function generarFechasDePago(cuotas) {
+  const fechasPago = [];
+  const fechaPedido = new Date();
+  
+  for (let i = 0; i < cuotas; i++) {
+    const fechaPago = new Date(fechaPedido);
+    fechaPago.setMonth(fechaPago.getMonth() + i + 1);
+    fechasPago.push(fechaPago.toLocaleDateString());
+  }
+
+  return fechasPago;
+}
+
+// Función para mostrar el detalle del crédito
+function mostrarDetalleCredito(monto, cuotas, fechasPago) {
+  console.log("Detalle del crédito:");
+  console.log("Monto solicitado:", monto);
+  console.log("Cantidad de cuotas:", cuotas);
+  console.log("Valor de cada cuota:", calcularValorCuota(monto, cuotas).toFixed(2));
+  console.log("Interés por cuota:", (calcularMontoTotal(monto, cuotas) - monto).toFixed(2));
+  console.log("Fecha de solicitud:", new Date().toLocaleDateString());
+  console.log("Fecha de vencimiento de cuotas:");
+
+  fechasPago.forEach((fecha, index) => {
+    console.log(`Cuota ${index + 1}: ${fecha}`);
+  });
+
+  console.log("Monto total a pagar:", calcularMontoTotal(monto, cuotas).toFixed(2));
+}
+
+// Inicio del programa
+const usuarioIngresado = prompt("Ingrese su usuario:");
+const contraseñaIngresada = prompt("Ingrese su contraseña:");
+
+if (verificarCredenciales(usuarioIngresado, contraseñaIngresada)) {
+  const fechaNacimiento = prompt("Ingrese su fecha de nacimiento (dd/mm/aaaa):");
+  const edad = calcularEdad(fechaNacimiento);
+
+  if (edad >= 18) {
+    const montoSolicitado = parseFloat(prompt("Ingrese el monto de dinero que necesita:"));
+    const cuotas = parseInt(prompt("Elija la cantidad de cuotas (3, 6, 12 o 24):"));
+    
+    if ([3, 6, 12, 24].includes(cuotas)) {
+      const fechasPago = generarFechasDePago(cuotas);
+      mostrarDetalleCredito(montoSolicitado, cuotas, fechasPago);
+    } else {
+      console.log("Cantidad de cuotas no válida. Por favor, elija entre 3, 6, 12 o 24 cuotas.");
+    }
+  } else {
+    console.log("Debes ser mayor de 18 años para solicitar un crédito.");
+  }
+} else {
+  console.log("Usuario y/o contraseña incorrectos. Por favor, inténtelo nuevamente.");
+}
+
+
+*/
+
+
+
+
+
+
 
 
 
@@ -165,3 +282,89 @@ let n2 = prompt('primer dato: ')
 console.log(sumar(n1 , n2))
 */
 
+
+
+//Es una verdulería virtual
+
+// Datos de acceso
+const usuarioValido = "GUILLE";
+const contraseñaValida = "CODERHOUSE";
+
+// Base de datos de productos
+const productos = [
+  { nombre: "zanahoria", precio: 100 },
+  { nombre: "papa", precio: 150 },
+  { nombre: "zapallo", precio: 210 },
+  { nombre: "rabanito", precio: 350 },
+  { nombre: "banana", precio: 340 },
+  { nombre: "Manzana", precio: 400 },
+  { nombre: "Pera", precio: 320 },
+  { nombre: "kiwi", precio: 500 },
+  { nombre: "frutilla", precio: 650 },
+  { nombre: "melón", precio: 400 }
+];
+
+// Función para verificar las credenciales
+function verificarCredenciales(usuario, contraseña) {
+  return usuario === usuarioValido && contraseña === contraseñaValida;
+}
+
+// Función para mostrar los productos
+function mostrarProductos() {
+  console.log("Lista de productos:");
+  productos.forEach((producto, index) => {
+    console.log(`${index + 1} - ${producto.nombre}, $${producto.precio}`);
+  });
+}
+
+// Función principal
+function main() {
+  const usuarioIngresado = prompt("Ingrese su usuario:");
+  const contraseñaIngresada = prompt("Ingrese su contraseña:");
+
+  if (verificarCredenciales(usuarioIngresado, contraseñaIngresada)) {
+    console.log("Bienvenido a la verdulería en línea.");
+    mostrarProductos();
+
+    const carrito = [];
+
+    while (true) {
+      const numeroProducto = parseInt(prompt("Ingrese el número del producto (0 para finalizar):"));
+
+      if (numeroProducto === 0) {
+        break;
+      }
+
+      if (numeroProducto >= 1 && numeroProducto <= productos.length) {
+        const cantidadKilos = parseFloat(prompt(`Ingrese la cantidad de kilos de ${productos[numeroProducto - 1].nombre}:`));
+        carrito.push({
+          producto: productos[numeroProducto - 1].nombre,
+          precio: productos[numeroProducto - 1].precio,
+          cantidad: cantidadKilos
+        });
+      } else {
+        console.log("Número de producto inválido. Por favor, ingrese un número válido.");
+      }
+    }
+
+    // Calcular el total a pagar
+    let totalPagar = 0;
+    carrito.forEach(item => {
+      totalPagar += item.precio * item.cantidad;
+    });
+
+    // Mostrar el resumen de la compra
+    console.log("Resumen de la compra:");
+    carrito.forEach(item => {
+      console.log(`${item.cantidad.toFixed(2)} kg de ${item.producto}: $${(item.precio * item.cantidad).toFixed(2)}`);
+    });
+    console.log(`Total a pagar: $${totalPagar.toFixed(2)}`);
+
+    console.log("Gracias por su compra!");
+  } else {
+    console.log("Usuario y/o contraseña incorrectos. Por favor, inténtelo nuevamente.");
+  }
+}
+
+// Ejecutar la función principal
+main();
