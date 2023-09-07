@@ -284,6 +284,11 @@ console.log(sumar(n1 , n2))
 
 
 
+
+
+
+/*
+
 //Es una verdulería virtual
 
 // Datos de acceso
@@ -368,3 +373,75 @@ function main() {
 
 // Ejecutar la función principal
 main();
+*/
+
+
+
+
+
+const productos = [
+    { nombre: "Zanahoria", precio: 100 },
+    { nombre: "Papa", precio: 150 },
+    { nombre: "Zapallo", precio: 210 },
+    { nombre: "Rabanito", precio: 350 },
+    { nombre: "Banana", precio: 340 },
+    { nombre: "Manzana", precio: 400 },
+    { nombre: "Pera", precio: 320 },
+    { nombre: "Kiwi", precio: 500 },
+    { nombre: "Frutilla", precio: 650 },
+    { nombre: "Melón", precio: 400 },
+    { nombre: "huevos", precio: 2000 },
+];
+
+let carrito = [];
+let total = 0;
+let nombreCliente = "";
+
+function verificarEdad() {
+    const nombre = document.getElementById("nombre").value;
+    const edad = parseInt(document.getElementById("edad").value);
+
+    if (nombre.trim() === "" || isNaN(edad) || edad < 18) {
+        alert("Debes ingresar un nombre válido y ser mayor de 18 años para continuar.");
+    } else {
+        nombreCliente = nombre;
+        document.getElementById("bienvenida").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+        document.getElementById("nombreCliente").textContent = nombreCliente;
+    }
+}
+
+function agregarProducto(nombre, precioPorKilo) {
+    const cantidad = parseFloat(prompt(`Ingresa la cantidad de ${nombre} (en kilos):`));
+    if (!isNaN(cantidad) && cantidad > 0) {
+        const subtotal = cantidad * precioPorKilo;
+        carrito.push({ nombre, cantidad, subtotal });
+        total += subtotal;
+        actualizarCarrito();
+    } else {
+        alert("Cantidad no válida. Ingresa un número válido.");
+    }
+}
+
+function actualizarCarrito() {
+    const carritoList = document.getElementById("carrito");
+    const totalElement = document.getElementById("total");
+    carritoList.innerHTML = "";
+    carrito.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${item.cantidad.toFixed(2)} kg de ${item.nombre}: $${item.subtotal.toFixed(2)}`;
+        carritoList.appendChild(listItem);
+    });
+    totalElement.textContent = total.toFixed(2);
+}
+
+function finalizarCompra() {
+    document.getElementById("contenido").style.display = "none";
+    document.getElementById("despedida").style.display = "block";
+    alert(`Gracias por tu compra, ${nombreCliente}!`);
+}
+
+function cancelarCompra() {
+    alert("Compra cancelada. Hasta luego.");
+    location.reload(); // Recargar la página para empezar de nuevo
+}
